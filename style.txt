@@ -1,0 +1,19 @@
+Style guide for "group game" by Michael & David Cohoe
+8/1/16
+
+File Organization:
+
+- Each "category" is separated into directories.
+- .h and .cpp files are placed together in the same directory.
+- There are 4 main directories: src, build, audio, and graphics
+- In src, there is the following directories: Main, Game, Screen, Libraries
+  (Functions that make libraries easier to use)
+
+General Code Style:
+
+- Each file is opened by a comment that explains the file's purpose
+- There is a comment before each function (in both the .cpp and the .h) describing their purpose
+- Each new variable is accompanied by a comment describing its purpose
+- Any unclear lines of code are accompanied by a descriptive comment
+- Global variables are not used
+- Input is done in main
