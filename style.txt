@@ -6,8 +6,7 @@ File Organization:
 - Each "category" is separated into directories.
 - .h and .cpp files are placed together in the same directory.
 - There are 4 main directories: src, build, audio, and graphics
-- In src, there is the following directories: Main, Game, Screen, Libraries
-  (Functions that make libraries easier to use)
+- In src, there is the following directories: Main, Game, Screen, Libraries (Functions that make libraries easier to use)
 
 General Code Style:
 
@@ -17,3 +16,6 @@ General Code Style:
 - Any unclear lines of code are accompanied by a descriptive comment
 - Global variables are not used
 - Input is done in main
+- Variable names will be made with lowercase letters with underscores between words.
+- Class names will be made with words with the first letter capitalized.
+- Constant names will be all caps.
