@@ -1,0 +1,57 @@
+# This makefile was inspired by several online examples.
+# The nice thing is, you never have to edit it with new files and such.
+# One problem is that it only works on Windows, since that's where we develop.
+
+# These are the compiler options when building a release build.
+# Uncomment these lines and comment the debug ones when you want to compile a release build.
+#CC        := g++ -Wall -O2 -flto -std=c++11 -MMD
+#LD        := g++ -Wall -O2 -flto -std=c++11 -MMD
+
+# These are the compiler options when building a debug build.
+# Uncomment these lines and comment the release ones when you want to compile a debug build.
+CC        := g++ -Wall -std=c++11 -MMD -g -D_DEBUG
+LD        := g++ -Wall -std=c++11 -MMD -g -D_DEBUG
+
+# Get all directories in src/ (windows only)
+MODULES := $(subst \,/,$(subst src,,$(filter src%,$(subst $(shell echo %cd%)\,,$(shell dir /a:d /s /b | sort)))))
+# Get all source and build directories
+SRC_DIR   := $(addprefix src,$(MODULES))
+BUILD_DIR := $(addprefix build,$(MODULES))
+
+# Get all source and build files
+SRC       := $(foreach sdir,$(SRC_DIR),$(wildcard $(sdir)/*.cpp))
+OBJ       := $(patsubst src/%.cpp,build/%.o,$(SRC))
+# Get dependency files
+DEPENDS   := ${OBJ:.o=.d}
+
+# The rest is either simple or I have no idea what it does
+# But, I know this utilizes all of the previous variables to make everything without having to update the makefile
+
+vpath %.cpp $(SRC_DIR)
+
+define make-goal
+$1/%.o: %.cpp 
+	$(CC) -c $$< -o $$@
+endef
+
+.PHONY: all checkdirs clean
+
+all: checkdirs game.exe
+
+game.exe: $(OBJ)
+	$(LD) $^ -o $@ -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer
+
+
+checkdirs: $(BUILD_DIR)
+
+$(BUILD_DIR):
+	@mkdir "$@"
+
+clean:
+	# Windows only
+	rmdir build /s /q
+	make
+
+-include $(DEPENDS)
+
+$(foreach bdir,$(BUILD_DIR),$(eval $(call make-goal,$(bdir))))
