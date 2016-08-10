@@ -17,6 +17,8 @@ Sprite::Sprite(std::string filename, Graphics* g)
         std::cout << "SDL_image error: " << IMG_GetError() << "\n";
     }
     else {
+        // Color key image
+        SDL_SetColorKey(temp_surface, SDL_TRUE, SDL_MapRGB(temp_surface->format, 0, 0xFE, 0));
         // Create texture
         texture = SDL_CreateTextureFromSurface(graphics->get_renderer(), temp_surface);
         if (texture == NULL) {

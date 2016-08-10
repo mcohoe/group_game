@@ -17,6 +17,9 @@ int main(int argc, char* args[])
     Sprite test("Graphics/Test.png", &graphics);
     test.set_xy(0, 0);
     test.set_sprite_sheet(3, 2);
+    Sprite test2("Graphics/Test2.png", &graphics);
+    test2.set_xy(50, 50);
+    test2.set_z(10);
     for (int i = 0; i < 200; i++) {
         graphics.update();
         test.set_xy(i, i);
