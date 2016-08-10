@@ -76,3 +76,33 @@ SDL_Rect* Sprite::get_screen_rect()
     // x and y are set in other places
     return &screen_rect;
 }
+
+// Start playing an animation
+void Sprite::start_animation(Animation anime)
+{
+    current_animation = anime;
+    animation_count = 0;
+}
+
+// Stop playing an animation
+void Sprite::stop_animation()
+{
+    current_animation.clear();
+    animation_count = 0;
+}
+
+// Update the current animation
+void Sprite::update_animation()
+{
+    // If no animation is playing, don't update the animation
+    if (current_animation.size() == 0) return;
+
+    // Go to next frame in animation
+    animation_count += 1;
+    if (animation_count >= current_animation.size()) {
+        animation_count = 0;
+    }
+    // Set sprite sheet values to the animation's values
+    sprite_sheet_x = current_animation[animation_count].first;
+    sprite_sheet_y = current_animation[animation_count].second;
+}

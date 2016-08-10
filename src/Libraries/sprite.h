@@ -6,6 +6,11 @@
 #include "graphics.h"
 
 #include <string>
+#include <vector>
+#include <utility>
+
+// Animations are just a vector of pairs of x and y sprite sheet values
+typedef std::vector<std::pair<int, int>> Animation;
 
 class Sprite
 {
@@ -20,6 +25,8 @@ class Sprite
     int sprite_sheet_y = 0; // Which sprite this is on the sprite sheet vertically
     int z = 0; // The order images appear on the screen
     Graphics* graphics; // The graphics used by the game
+    Animation current_animation; // The animation currently being played
+    unsigned int animation_count = 0; // The current frame of the animation being played
     public:
         Sprite(std::string filename, Graphics* g); // Sets up the sprite with the graphic "filename"
         ~Sprite(); // Destroys texture and removes sprite from the sprite list
@@ -31,6 +38,9 @@ class Sprite
         SDL_Texture* get_texture() {return texture;}
         SDL_Rect* get_sprite_rect(); // Get rectangle of the texture being used
         SDL_Rect* get_screen_rect(); // Get rectangle of screen position
+        void start_animation(Animation); // Start playing an animation
+        void stop_animation(); // Stop playing an animation
+        void update_animation(); // Update the current animation
 };
 
 #endif

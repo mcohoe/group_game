@@ -21,6 +21,8 @@ int main(int argc, char* args[])
     Sprite test("Graphics/Test.png", &graphics);
     test.set_xy(x, y);
     test.set_sprite_sheet(3, 2);
+    Animation anime = {{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 1}, {0, 1}, {0, 1}};
+    test.start_animation(anime);
     Sprite test2("Graphics/Test2.png", &graphics);
     test2.set_xy(50, 50);
     test2.set_z(10);
@@ -40,6 +42,8 @@ int main(int argc, char* args[])
         if (keys[SDL_SCANCODE_RIGHT]) x += 1;
         if (keys[SDL_SCANCODE_UP]) y -= 1;
         test.set_xy(x, y);
+
+        test.update_animation();
 
         graphics.update();
     }
