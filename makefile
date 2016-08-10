@@ -39,7 +39,7 @@ endef
 all: checkdirs game.exe
 
 game.exe: $(OBJ)
-	$(LD) $^ -o $@ -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer
+	$(LD) $^ -o $@ -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lSDL2_image
 
 
 checkdirs: $(BUILD_DIR)

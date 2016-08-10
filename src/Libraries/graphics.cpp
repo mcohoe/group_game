@@ -2,9 +2,13 @@
 
 #include "graphics.h"
 #include <iostream>
+#include <algorithm>
+
+#include "sprite.h"
+
+bool Graphics::initialized;
 
 // This function initializes everything needed to be able to draw graphics.
-// It returns true if a problem happened and it was unsuccessful.
 Graphics::Graphics()
 {
     // Initialize SDL (SDL_Init returns -1 on failure)
@@ -21,15 +25,17 @@ Graphics::Graphics()
             std::cout << SDL_GetError() << "\n";
         }
         else {
-            // Get surface
-            surface = SDL_GetWindowSurface(window);
-
-            initialized = true;
-
-            // The next few lines are for testing
-            // They'll be removed later
-            SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 0xFF, 0xFF, 0xFF));
-            SDL_UpdateWindowSurface(window);
+            // Get renderer 
+            renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+            if (renderer == NULL) {
+                std::cout << "Error: Renderer could not be created.\nSDL_Error:";
+                std::cout << SDL_GetError() << "\n";
+            }
+            else {
+                // Set initial screen values
+                SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
+                initialized = true;
+            }
         }
     }
 }
@@ -38,7 +44,40 @@ Graphics::Graphics()
 Graphics::~Graphics()
 {
     // Destroy window
+    SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     // Quit SDL
     SDL_Quit();
+
+    initialized = false;
+}
+
+// This function redraws the screen
+void Graphics::update()
+{
+    // Clear screen
+    SDL_RenderClear(renderer);
+    // Sort the sprites by z coordinate
+    sprites.sort([](Sprite* a, Sprite* b) {return a->get_z() < b->get_z();});
+    // Draw all sprites
+    for (Sprite* s : sprites) {
+        SDL_RenderCopy(renderer, s->get_texture(), NULL, s->get_rect());
+    }
+    // Update screen
+    SDL_RenderPresent(renderer);
+}
+
+// Removes a sprite from the sprite list
+void Graphics::remove_sprite(Sprite* s)
+{
+    // Find the iterator representing this sprite in the list
+    auto it = sprites.begin();
+    while (it != sprites.end()) {
+        // If the correct element
+        if (*it == s) {
+            sprites.erase(it);
+            return;
+        }
+        else it++;
+    }
 }
