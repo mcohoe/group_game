@@ -12,7 +12,7 @@ bool Graphics::initialized;
 Graphics::Graphics()
 {
     // Initialize SDL (SDL_Init returns -1 on failure)
-    if (SDL_Init(SDL_INIT_VIDEO) == -1) {
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) == -1) {
         std::cout << "Error: could not initialize SDL.\nSDL_Error:";
         std::cout << SDL_GetError() << "\n";
     }

@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "../Libraries/graphics.h"
+#include "../Libraries/audio.h"
 #include "../Libraries/sprite.h"
 
 int main(int argc, char* args[])
@@ -11,6 +12,13 @@ int main(int argc, char* args[])
     // If an error occured while initializing graphics
     if (!Graphics::get_initialized()) {
         std::cout << "An error occured while initializing graphics.";
+        return 1;
+    }
+    // Initialize graphics
+    Audio audio;
+    // If an error occured while initializing graphics
+    if (!Audio::get_initialized()) {
+        std::cout << "An error occured while initializing audio.";
         return 1;
     }
     const Uint8* keys = SDL_GetKeyboardState(NULL); // Keys being pressed
@@ -41,6 +49,9 @@ int main(int argc, char* args[])
         if (keys[SDL_SCANCODE_LEFT]) x -= 1;
         if (keys[SDL_SCANCODE_RIGHT]) x += 1;
         if (keys[SDL_SCANCODE_UP]) y -= 1;
+        if (keys[SDL_SCANCODE_M]) audio.play_music("Audio/SLUDGE.WAV");
+        if (keys[SDL_SCANCODE_S]) audio.stop_music();
+        if (keys[SDL_SCANCODE_P]) audio.play_sound("Audio/SLUDGE.WAV");
         test.set_xy(x, y);
 
         test.update_animation();
