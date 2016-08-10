@@ -26,11 +26,11 @@ Sprite::Sprite(std::string filename, Graphics* g)
         else {
             // Add to graphic's sprite list
             graphics->add_sprite(this);
-            // Create rectangle
+            // Set texture width and height
             int w, h;
             SDL_QueryTexture(texture, NULL, NULL, &w, &h);
-            rect.w = w;
-            rect.h = h;
+            texture_width = w;
+            texture_height = h;
         }
         // Free the image
         SDL_FreeSurface(temp_surface);
@@ -47,9 +47,30 @@ Sprite::~Sprite()
     }
 }
 
-// Updates the x and y values of the sprite
-void Sprite::update(unsigned int x, unsigned int y)
+// Get rectangle of specific sprite to use on texture
+SDL_Rect* Sprite::get_sprite_rect()
 {
-    rect.x = x;
-    rect.y = y;
+    // Get width and height of current sprite
+    int w, h;
+    w = texture_width / sprite_sheet_width;
+    h = texture_height / sprite_sheet_height;
+    sprite_rect.w = w;
+    sprite_rect.h = h;
+    // Get x and y of current sprite
+    sprite_rect.x = w * sprite_sheet_x;
+    sprite_rect.y = h * sprite_sheet_y;
+    return &sprite_rect;
+}
+
+// Get rectangle of where on the screen the sprite needs to get drawn
+SDL_Rect* Sprite::get_screen_rect()
+{
+    // Get width and height of current sprite
+    int w, h;
+    w = texture_width / sprite_sheet_width;
+    h = texture_height / sprite_sheet_height;
+    screen_rect.w = w;
+    screen_rect.h = h;
+    // x and y are set in other places
+    return &screen_rect;
 }

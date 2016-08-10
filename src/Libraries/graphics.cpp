@@ -61,7 +61,7 @@ void Graphics::update()
     sprites.sort([](Sprite* a, Sprite* b) {return a->get_z() < b->get_z();});
     // Draw all sprites
     for (Sprite* s : sprites) {
-        SDL_RenderCopy(renderer, s->get_texture(), NULL, s->get_rect());
+        SDL_RenderCopy(renderer, s->get_texture(), s->get_sprite_rect(), s->get_screen_rect());
     }
     // Update screen
     SDL_RenderPresent(renderer);
