@@ -17,23 +17,9 @@ int main(int argc, char* args[])
     Sprite test("Graphics/Test.png", &graphics);
     test.set_xy(0, 0);
     test.set_sprite_sheet(3, 2);
-    graphics.update();
-    SDL_Delay(500);
-    test.set_sprite_sheet_xy(1, 0);
-    graphics.update();
-    SDL_Delay(500);
-    test.set_sprite_sheet_xy(2, 0);
-    graphics.update();
-    SDL_Delay(500);
-    test.set_sprite_sheet_xy(0, 1);
-    graphics.update();
-    SDL_Delay(500);
-    test.set_sprite_sheet_xy(1, 1);
-    graphics.update();
-    SDL_Delay(500);
-    test.set_sprite_sheet_xy(2, 1);
-    graphics.update();
-    SDL_Delay(1000);
-
+    for (int i = 0; i < 200; i++) {
+        graphics.update();
+        test.set_xy(i, i);
+    }
     return 0;
 }

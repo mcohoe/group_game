@@ -52,7 +52,7 @@ Graphics::~Graphics()
     initialized = false;
 }
 
-// This function redraws the screen
+// This function redraws the screen and waits for the current frame to finish
 void Graphics::update()
 {
     // Clear screen
@@ -65,6 +65,13 @@ void Graphics::update()
     }
     // Update screen
     SDL_RenderPresent(renderer);
+    // Find how long this frame has been running
+    int current_frame_relative_ticks = SDL_GetTicks() - current_frame_start_ticks;
+    // Wait for the frame to finish
+    if (current_frame_relative_ticks < TICKS_PER_FRAME) {
+        SDL_Delay(TICKS_PER_FRAME - current_frame_relative_ticks);
+    }
+    current_frame_start_ticks = SDL_GetTicks();
 }
 
 // Removes a sprite from the sprite list
