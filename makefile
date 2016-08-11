@@ -47,8 +47,8 @@ checkdirs: $(BUILD_DIR)
 $(BUILD_DIR):
 	@mkdir "$@"
 
+# Windows only
 clean:
-	# Windows only
 	rmdir build /s /q
 	make
 
