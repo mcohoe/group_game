@@ -1,0 +1,41 @@
+#CC        := g++ -Wall -O2 -flto -std=c++11 -MMD
+#LD        := g++ -Wall -O2 -flto -std=c++11 -MMD
+
+CC        := g++ -fpch-deps -Wall -std=c++11 -MMD -ggdb3 -D_DEBUG
+LD        := g++ -fpch-deps -Wall -std=c++11 -MMD -ggdb3 -D_DEBUG
+
+MODULES := $(sort $(subst ./src,,$(filter ./src%,$(shell find . -type d))))
+SRC_DIR   := $(addprefix src,$(MODULES))
+BUILD_DIR := $(addprefix build,$(MODULES))
+
+SRC       := $(foreach sdir,$(SRC_DIR),$(sort $(wildcard $(sdir)/*.cpp)))
+OBJ       := $(patsubst src/%.cpp,build/%.o,$(SRC))
+DEPENDS   := ${OBJ:.o=.d}
+
+vpath %.cpp $(SRC_DIR)
+
+define make-goal
+$1/%.o: %.cpp
+	$(CC) -c $$< -o $$@
+endef
+
+.PHONY: all checkdirs clean
+
+all: checkdirs r
+
+r: $(OBJ)
+	$(LD) $^ -o $@ -lSDL2main -lSDL2 -lSDL2_mixer -lSDL2_image -lpthread
+
+
+checkdirs: $(BUILD_DIR)
+
+$(BUILD_DIR):
+	@mkdir $@
+
+clean:
+	-rm -r build/*
+	make
+
+-include $(DEPENDS)
+
+$(foreach bdir,$(BUILD_DIR),$(eval $(call make-goal,$(bdir))))
