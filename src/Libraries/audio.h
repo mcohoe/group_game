@@ -16,6 +16,10 @@ class Audio {
     public:
         Audio(); // Sets up SDL_Mixer
         ~Audio(); // Stops music and quit SDL_Mixer
+        // Disable any kind of copying
+        Audio& operator=(const Audio&) = delete;
+        Audio(const Audio&) = delete;
+
         void play_sound(std::string filename, int volume = 128); // Play sound effect
         void play_music(std::string filename, int volume = 128); // Play music
         void stop_music(int fadeout = 0); // Stop music (with possible fadeout)

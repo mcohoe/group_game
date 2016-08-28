@@ -30,6 +30,10 @@ class Sprite
     public:
         Sprite(std::string filename, Graphics* g); // Sets up the sprite with the graphic "filename"
         ~Sprite(); // Destroys texture and removes sprite from the sprite list
+        // Disable any kind of copying
+        Sprite& operator=(const Sprite&) = delete;
+        Sprite(const Sprite&) = delete;
+
         void set_xy(int x, int y) {screen_rect.x = x; screen_rect.y = y;} 
         int get_z() {return z;}
         void set_z(int to_set) {z = to_set;}

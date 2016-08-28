@@ -29,6 +29,10 @@ class Graphics
     public:
         Graphics(); // Initializes the window for use
         ~Graphics(); // Destroys the window being used
+        // Disable any kind of copying
+        Graphics& operator=(const Graphics&) = delete;
+        Graphics(const Graphics&) = delete;
+
         void update(); // Redraws the screen and waits for the frame to finish
         void add_sprite(Sprite* s) {sprites.push_back(s);} // Add a sprite to the sprite list
         void remove_sprite(Sprite* s); // Remove a sprite from the sprite list
