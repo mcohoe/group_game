@@ -1,5 +1,9 @@
-# Ignore exe
+# Ignore executable
 game.exe
+game
 
 # Ignore any object files
 build/
+
+# Ignore platform-specific makefile
+makefile
