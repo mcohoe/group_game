@@ -9,8 +9,8 @@
 
 # These are the compiler options when building a debug build.
 # Uncomment these lines and comment the release ones when you want to compile a debug build.
-CC        := g++ -Wall -std=c++11 -MMD -g -D_DEBUG
-LD        := g++ -Wall -std=c++11 -MMD -g -D_DEBUG
+CC        := g++ -Wall -std=c++11 -MMD -ggdb3 -D_DEBUG -Isrc
+LD        := g++ -Wall -std=c++11 -MMD -ggdb3 -D_DEBUG
 
 # Get all directories in src/ (windows only)
 MODULES := $(subst \,/,$(subst src,,$(filter src%,$(subst $(shell echo %cd%)\,,$(shell dir /a:d /s /b | sort)))))

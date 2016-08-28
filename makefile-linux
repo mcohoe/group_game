@@ -1,7 +1,10 @@
+# This makefile is basically the same thing as the Windows makefile
+# Just read that makefile's documentation to understand this one
+
 #CC        := g++ -Wall -O2 -flto -std=c++11 -MMD
 #LD        := g++ -Wall -O2 -flto -std=c++11 -MMD
 
-CC        := g++ -fpch-deps -Wall -std=c++11 -MMD -ggdb3 -D_DEBUG
+CC        := g++ -fpch-deps -Wall -std=c++11 -MMD -ggdb3 -D_DEBUG -Isrc
 LD        := g++ -fpch-deps -Wall -std=c++11 -MMD -ggdb3 -D_DEBUG
 
 MODULES := $(sort $(subst ./src,,$(filter ./src%,$(shell find . -type d))))
@@ -21,11 +24,10 @@ endef
 
 .PHONY: all checkdirs clean
 
-all: checkdirs r
+all: checkdirs game
 
-r: $(OBJ)
-	$(LD) $^ -o $@ -lSDL2main -lSDL2 -lSDL2_mixer -lSDL2_image -lpthread
-
+game: $(OBJ)
+	$(LD) $^ -o $@ -lSDL2main -lSDL2 -lSDL2_mixer -lpthread
 
 checkdirs: $(BUILD_DIR)
 
