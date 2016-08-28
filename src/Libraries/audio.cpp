@@ -66,6 +66,9 @@ void Audio::play_music(std::string filename, int volume)
 {
     // If music is playing, stop it first
     if (music != NULL) stop_music();
+
+    music_lock.lock();
+
     // Load new music
     music = Mix_LoadMUS(filename.c_str());
     if (music == NULL) {
@@ -76,6 +79,9 @@ void Audio::play_music(std::string filename, int volume)
     // Set volume and play
     Mix_VolumeMusic(volume);
     Mix_PlayMusic(music, -1);
+
+    music_lock.unlock();
+
 }
 
 // Stop playing music
@@ -94,20 +100,16 @@ void Audio::stop_music(int fadeout)
     // If stopping normally
     else {
         // If currently fading out
-        if (!fade_lock.try_lock()) {
-            stop_fading = true;
-            // Wait for fading thread to stop
-            fade_lock.lock();
-            fade_lock.unlock();
+        if (!music_lock.try_lock()) {
+            stop_fading = true; // The fading thread deals with the rest
         }
         // If not fading out
         else {
-            // We accidentally got the lock here so we need to unlock it
-            fade_lock.unlock();
             // Stop music
             Mix_HaltMusic();
             Mix_FreeMusic(music);
             music = NULL;
+            music_lock.unlock();
         }
     }
 }
@@ -116,7 +118,7 @@ void Audio::stop_music(int fadeout)
 void Audio::fade_music_internal(Audio* self, int fadeout)
 {
     // Stop if already fading
-    if (self->fade_lock.try_lock()) {
+    if (self->music_lock.try_lock()) {
         Mix_FadeOutMusic(fadeout);
         // Check every tick if we need to stop
         for (int i = 0; i < fadeout; i++) {
@@ -130,6 +132,6 @@ void Audio::fade_music_internal(Audio* self, int fadeout)
         Mix_HaltMusic();
         Mix_FreeMusic(self->music);
         self->music = NULL;
-        self->fade_lock.unlock();
+        self->music_lock.unlock();
     }
 }

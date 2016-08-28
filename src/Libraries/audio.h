@@ -11,7 +11,7 @@ class Audio {
     static void play_sound_internal(Mix_Chunk*); // Actually plays sound (gets called as a new thread)
     static void fade_music_internal(Audio* self, int fadeout); // Fades music (gets called as a new thread)
     static bool initialized; // True while audio is working
-    std::mutex fade_lock; // Lock used for fading music
+    std::mutex music_lock; // Lock used for the music (mainly needed for fading)
     bool stop_fading = false; // Flag to tell the audio to stop fading
     public:
         Audio(); // Sets up SDL_Mixer
