@@ -27,7 +27,7 @@ endef
 all: checkdirs game
 
 game: $(OBJ)
-	$(LD) $^ -o $@ -lSDL2main -lSDL2 -lSDL2_mixer -lpthread
+	$(LD) $^ -o $@ -lSDL2main -lSDL2 -lSDL2_mixer -lSDL2_image -lpthread
 
 checkdirs: $(BUILD_DIR)
 

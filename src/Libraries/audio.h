@@ -9,7 +9,7 @@
 class Audio {
     Mix_Music* music = NULL; // Background music
     static void play_sound_internal(Mix_Chunk*); // Actually plays sound (gets called as a new thread)
-    void fade_music_internal(int fadeout); // Fades music (gets called as a new thread)
+    static void fade_music_internal(Audio* self, int fadeout); // Fades music (gets called as a new thread)
     static bool initialized; // True while audio is working
     std::mutex fade_lock; // Lock used for fading music
     bool stop_fading = false; // Flag to tell the audio to stop fading

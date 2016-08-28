@@ -1,9 +1,9 @@
 // This file contains main.
 
 #include <iostream>
-#include "../Libraries/graphics.h"
-#include "../Libraries/audio.h"
-#include "../Libraries/sprite.h"
+#include "Libraries/graphics.h"
+#include "Libraries/audio.h"
+#include "Libraries/sprite.h"
 
 int main(int argc, char* args[])
 {

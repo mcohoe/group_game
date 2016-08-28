@@ -113,23 +113,23 @@ void Audio::stop_music(int fadeout)
 }
 
 // Fade out music
-void Audio::fade_music_internal(int fadeout)
+void Audio::fade_music_internal(Audio* self, int fadeout)
 {
     // Stop if already fading
-    if (fade_lock.try_lock()) {
+    if (self->fade_lock.try_lock()) {
         Mix_FadeOutMusic(fadeout);
         // Check every tick if we need to stop
         for (int i = 0; i < fadeout; i++) {
             SDL_Delay(1);
-            if (stop_fading) {
-                stop_fading = false;
+            if (self->stop_fading) {
+                self->stop_fading = false;
                 break;
             }
         }
         // Stop music
         Mix_HaltMusic();
-        Mix_FreeMusic(music);
-        music = NULL;
-        fade_lock.unlock();
+        Mix_FreeMusic(self->music);
+        self->music = NULL;
+        self->fade_lock.unlock();
     }
 }
