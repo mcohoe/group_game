@@ -19,3 +19,4 @@ General Code Style:
 - Variable names will be made with lowercase letters with underscores between words.
 - Class names will be made with words with the first letter capitalized.
 - Constant names will be all caps.
+- Private data in classes follow public data
