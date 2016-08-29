@@ -21,8 +21,8 @@ class Sprite
     int texture_height; // Height of the texture
     int sprite_sheet_width = 1; // How many sprites are on the texture horizontally
     int sprite_sheet_height = 1; // How many sprites are on the texture vertically
-    int sprite_sheet_x = 0; // Which sprite this is on the sprite sheet horizontally
-    int sprite_sheet_y = 0; // Which sprite this is on the sprite sheet vertically
+    int current_sprite_x = 0; // Which sprite this is on the sprite sheet horizontally
+    int current_sprite_y = 0; // Which sprite this is on the sprite sheet vertically
     int z = 0; // The order images appear on the screen
     Graphics* graphics; // The graphics used by the game
     Animation current_animation; // The animation currently being played
@@ -38,7 +38,7 @@ class Sprite
         int get_z() {return z;}
         void set_z(int to_set) {z = to_set;}
         void set_sprite_sheet(int w, int h) {sprite_sheet_width = w; sprite_sheet_height = h;}
-        void set_sprite_sheet_xy(int x, int y) {sprite_sheet_x = x; sprite_sheet_y = y;}
+        void set_current_sprite_xy(int x, int y) {current_sprite_x = x; current_sprite_y = y;}
         SDL_Texture* get_texture() {return texture;}
         SDL_Rect* get_sprite_rect(); // Get rectangle of the texture being used
         SDL_Rect* get_screen_rect(); // Get rectangle of screen position

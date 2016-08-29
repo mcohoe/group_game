@@ -59,8 +59,8 @@ SDL_Rect* Sprite::get_sprite_rect()
     sprite_rect.w = w;
     sprite_rect.h = h;
     // Get x and y of current sprite
-    sprite_rect.x = w * sprite_sheet_x;
-    sprite_rect.y = h * sprite_sheet_y;
+    sprite_rect.x = w * current_sprite_x;
+    sprite_rect.y = h * current_sprite_y;
     return &sprite_rect;
 }
 
@@ -103,6 +103,6 @@ void Sprite::update_animation()
         animation_count = 0;
     }
     // Set sprite sheet values to the animation's values
-    sprite_sheet_x = current_animation[animation_count].first;
-    sprite_sheet_y = current_animation[animation_count].second;
+    current_sprite_x = current_animation[animation_count].first;
+    current_sprite_y = current_animation[animation_count].second;
 }
