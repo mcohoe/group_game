@@ -13,8 +13,13 @@ void Tile::change_tile(Id to_set)
 {
     id = to_set;
     switch(to_set){
-        case Air:
+        case Empty:
             sprite = Sprite("", NULL);
+            solid = false;
+            break;
+
+        case Sky:
+            sprite = Sprite("Graphics/Sky.png", graphics);
             solid = false;
             break;
 

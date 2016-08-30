@@ -11,7 +11,7 @@ Map::Map(Graphics * graphics)
             if(y >= HEIGHT-3)
                 tiles[x][y] = Tile(Tile::Stone, graphics);
             else
-                tiles[x][y] = Tile();
+                tiles[x][y] = Tile(Tile::Sky, graphics);
             tiles[x][y].display_at(x*Tile::TILE_WIDTH, y*Tile::TILE_HEIGHT); 
         }
     }
