@@ -4,6 +4,7 @@
 #include "Libraries/graphics.h"
 #include "Libraries/audio.h"
 #include "Libraries/sprite.h"
+#include "Game/map.h"
 
 int main(int argc, char* args[])
 {
@@ -13,7 +14,7 @@ int main(int argc, char* args[])
         std::cout << "An error occured while initializing graphics.";
         return 1;
     }
-    // Initialize graphics
+    // Initialize audio
     Audio audio;
     if (!Audio::get_initialized()) {
         std::cout << "An error occured while initializing audio.";
@@ -22,6 +23,7 @@ int main(int argc, char* args[])
     const Uint8* keys = SDL_GetKeyboardState(NULL); // Keys being pressed
     bool quit = false; // set to true when quitting the program
     SDL_Event e; // Event used to handle sdl events
+    Map map(&graphics);
     // Main loop
     while (!quit) {
         // Quit if needed
