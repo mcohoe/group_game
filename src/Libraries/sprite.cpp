@@ -56,6 +56,67 @@ Sprite::~Sprite()
     }
 }
 
+// Move assignment operator
+Sprite& Sprite::operator=(Sprite&& other)
+{
+    // Don't move a sprite to itself
+    if (this != &other) {
+
+        // Replace texture
+        if (texture != NULL) {
+            SDL_DestroyTexture(texture);
+        }
+        texture = other.texture;
+        if (texture != NULL) {
+            // Get new width and height
+            SDL_QueryTexture(texture, NULL, NULL, &texture_width, &texture_height);
+        }
+
+
+        // Replace graphics
+
+        // If this used to be a sprite but is now not, remove the sprite
+        if (graphics != NULL) {
+            if (other.graphics == NULL) {
+                graphics->remove_sprite(this);
+            }
+        }
+        // If this used to not be a sprite but now is, add the sprite
+        else {
+            if (other.graphics != NULL) {
+                graphics->add_sprite(this);
+            }
+        }
+        graphics = other.graphics;
+
+        // Clear other sprite to default values
+        if (other.texture != NULL) {
+            other.texture = NULL; // We don't want to destroy the other texture because it is now ours
+        }
+        if (other.graphics != NULL) {
+            // However, we do need to remove the other sprite from graphics because that pointer is still for other
+            other.graphics->remove_sprite(&other);
+            other.graphics = NULL;
+        }
+    }
+
+    return *this;
+}
+
+// Move constructor
+Sprite::Sprite(Sprite&& other)
+{
+    texture = other.texture;
+    if (texture != NULL) {
+        SDL_QueryTexture(texture, NULL, NULL, &texture_width, &texture_height);
+    } // Don't destroy the texture because it is now ours
+
+    graphics = other.graphics;
+    // Remove and add to graphics as necessary
+    if (other.graphics != NULL) other.graphics->remove_sprite(&other);
+    if (graphics != NULL) graphics->add_sprite(this);
+}
+
 // Get rectangle of specific sprite to use on texture
 SDL_Rect* Sprite::get_sprite_rect()
 {

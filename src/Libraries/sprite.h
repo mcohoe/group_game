@@ -33,6 +33,9 @@ class Sprite
         // Disable any kind of copying
         Sprite& operator=(const Sprite&) = delete;
         Sprite(const Sprite&) = delete;
+        // Move constructors:
+        Sprite& operator=(Sprite&&);
+        Sprite(Sprite&&);
 
         void set_xy(int x, int y) {screen_rect.x = x; screen_rect.y = y;} 
         int get_z() {return z;}
