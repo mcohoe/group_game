@@ -1,6 +1,5 @@
 # Ignore executable
 game.exe
-game
 
 # Ignore any object files
 build/
