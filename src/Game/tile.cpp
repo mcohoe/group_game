@@ -25,4 +25,7 @@ void Tile::change_tile(Id to_set)
     return;
 }
 
-
+void Tile::display_at(int x, int y)
+{
+    sprite.set_xy(x,y);
+}

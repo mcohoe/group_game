@@ -12,11 +12,13 @@ class Tile {
         enum Id{Air, Stone};
         Tile(Id to_set = Air, Graphics * graphics_ = NULL);
         void change_tile(Id to_set);
-        
+        void display_at(int x, int y);
+
+
+        static const int TILE_WIDTH = 32;
+        static const int TILE_HEIGHT = 32; 
 
    private:
-        static const int TILE_WIDTH = 32;
-        static const int TILE_HEIGHT = 32;
         Sprite sprite;
         bool solid;
         Id id;
