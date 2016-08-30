@@ -25,6 +25,7 @@ void Entity::update()
     tile_y = pixel_y % TILE_HEIGHT;
 
     sprite.set_xy(screen_x(), screen_y());
+    hitbox.set_xy(pixel_x, pixel_y);
 }
 
 int Entity::screen_x()

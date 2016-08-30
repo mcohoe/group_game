@@ -3,7 +3,8 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "tile.h"
+#include "Game/tile.h"
+#include "Game/hitbox.h"
 #include "Libraries/sprite.h"
 
 class Entity {
@@ -30,6 +31,7 @@ class Entity {
         int x_accel = 0;
         int y_accel = 0;
         Sprite sprite;
+        Hitbox hitbox;
 
         int screen_x();
         int screen_y();
