@@ -24,11 +24,11 @@ class Sprite
     int current_sprite_x = 0; // Which sprite this is on the sprite sheet horizontally
     int current_sprite_y = 0; // Which sprite this is on the sprite sheet vertically
     int z = 0; // The order images appear on the screen
-    Graphics* graphics; // The graphics used by the game
+    Graphics* graphics = NULL; // The graphics used by the game
     Animation current_animation; // The animation currently being played
     unsigned int animation_count = 0; // The current frame of the animation being played
     public:
-        Sprite(std::string filename, Graphics* g); // Sets up the sprite with the graphic "filename"
+        Sprite(std::string filename = "", Graphics* g = NULL); // Sets up the sprite with the graphic "filename"
         ~Sprite(); // Destroys texture and removes sprite from the sprite list
         // Disable any kind of copying
         Sprite& operator=(const Sprite&) = delete;

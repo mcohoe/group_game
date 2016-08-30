@@ -9,6 +9,11 @@
 // Create sprite with the graphic "filename"
 Sprite::Sprite(std::string filename, Graphics* g)
 {
+    // If making a fake sprite, the constructor shouldn't do anything
+    if (filename == "" or g == NULL) {
+        return;
+    }
+
     graphics = g;
     // Load image
     SDL_Surface* temp_surface = IMG_Load(filename.c_str());
@@ -42,9 +47,11 @@ Sprite::Sprite(std::string filename, Graphics* g)
 // Destroys the texture held by the sprite and removes the sprite from the sprite list
 Sprite::~Sprite()
 {
-    SDL_DestroyTexture(texture);
+    if (texture != NULL) {
+        SDL_DestroyTexture(texture);
+    }
     // If graphics are still running
-    if (Graphics::get_initialized()) {
+    if (graphics != NULL and Graphics::get_initialized()) {
         graphics->remove_sprite(this);
     }
 }
