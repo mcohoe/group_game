@@ -4,11 +4,12 @@
 #define ENTITY_H
 
 #include "tile.h"
+#include "Libraries/sprite.h"
 
 class Entity {
     public:
         Entity(int x = 0, int y = 0);
-        void update();
+        virtual void update();
 
         static const int PIXEL_WIDTH = 16;
         static const int PIXEL_HEIGHT = 16;
@@ -28,6 +29,10 @@ class Entity {
         int y_vel = 0;
         int x_accel = 0;
         int y_accel = 0;
+        Sprite sprite;
+
+        int screen_x();
+        int screen_y();
 };
 
 #endif

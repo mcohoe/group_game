@@ -23,4 +23,16 @@ void Entity::update()
     pixel_y = subpixel_y % PIXEL_HEIGHT;
     tile_x = pixel_x % TILE_WIDTH;
     tile_y = pixel_y % TILE_HEIGHT;
+
+    sprite.set_xy(screen_x(), screen_y());
+}
+
+int Entity::screen_x()
+{
+    return pixel_x;
+}
+
+int Entity::screen_y()
+{
+    return pixel_y;
 }
