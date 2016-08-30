@@ -3,14 +3,14 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "Game/tile.h"
+#include "Game/map.h"
 #include "Game/hitbox.h"
 #include "Libraries/sprite.h"
 
 class Entity {
     public:
         Entity(int x = 0, int y = 0);
-        virtual void update();
+        virtual void update(Map& map);
 
         static const int PIXEL_WIDTH = 16;
         static const int PIXEL_HEIGHT = 16;
@@ -35,6 +35,8 @@ class Entity {
 
         int screen_x();
         int screen_y();
+
+        void change_pixel_xy(int& coord, int change, Map& map);
 };
 
 #endif
