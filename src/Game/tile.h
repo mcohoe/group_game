@@ -9,20 +9,19 @@
 class Tile {
 
    public:
-        enum Id{Air, Stone};
-        Tile(Id to_set = Air, Graphics * graphics_ = NULL);
-        void change_tile(Id to_set);
-        void display_at(int x, int y);
+        enum Id{Air, Stone};                                //enum that holds every possible tile type
+        Tile(Id to_set = Air, Graphics * graphics_ = NULL); //contrstuctor that takes in a tile id and the graphics. Builds an air tile if none are passed in.
+        void change_tile(Id to_set);                        //function that changes the tile type
+        void display_at(int x, int y);                      //function that sets the tile's sprite's x and y 
 
-
-        static const int TILE_WIDTH = 32;
-        static const int TILE_HEIGHT = 32; 
+        static const int TILE_WIDTH = 32;                   //width of a tile
+        static const int TILE_HEIGHT = 32;                  //height of a tile
 
    private:
-        Sprite sprite;
-        bool solid;
-        Id id;
-        Graphics * graphics;
+        Sprite sprite;                                      //sprite of the tile
+        bool solid;                                         //boolean that says whether or not the tile is solid
+        Id id;                                              //Tile Id
+        Graphics * graphics;                                //pointer to the graphics
 
 
 
