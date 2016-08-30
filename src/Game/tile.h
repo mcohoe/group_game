@@ -4,12 +4,13 @@
 #define TILE_H
 
 #include "Libraries/sprite.h"
+#include "Libraries/graphics.h"
 
 class Tile {
 
    public:
         enum Id{Air, Stone};
-        Sprite(Id id = Air);
+        Tile(Id to_set = Air, Graphics * graphics_ = NULL);
         void change_tile(Id to_set);
         
 
@@ -19,6 +20,7 @@ class Tile {
         Sprite sprite;
         bool solid;
         Id id;
+        Graphics * graphics;
 
 
 
