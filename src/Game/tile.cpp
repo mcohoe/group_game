@@ -37,3 +37,11 @@ void Tile::display_at(int x, int y)
 {
     sprite.set_xy(x,y);
 }
+
+bool Tile::colliding_with(Hitbox other)
+{
+    if (solid) {
+        if (hitbox.is_touching(other)) return true;
+    }
+    return false;
+}

@@ -17,3 +17,8 @@ Map::Map(Graphics * graphics)
         }
     }
 }
+
+bool Map::colliding_with(int x, int y, Hitbox other)
+{
+    return tiles[x][y].colliding_with(other);
+}

@@ -14,6 +14,7 @@ class Tile {
         Tile(Id to_set = Empty, Graphics * graphics_ = NULL, Hitbox hitbox_ = Hitbox()); //constructor that takes in a tile id and the graphics. Builds an empty tile if none are passed in.
         void change_tile(Id to_set);                          //function that changes the tile type
         void display_at(int x, int y);                        //function that sets the tile's sprite's x and y 
+        bool colliding_with(Hitbox other);
 
         static const int TILE_WIDTH = 32;                     //width of a tile
         static const int TILE_HEIGHT = 32;                    //height of a tile
