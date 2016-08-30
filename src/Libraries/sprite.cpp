@@ -84,7 +84,7 @@ Sprite& Sprite::operator=(Sprite&& other)
         // If this used to not be a sprite but now is, add the sprite
         else {
             if (other.graphics != NULL) {
-                graphics->add_sprite(this);
+                other.graphics->add_sprite(this);
             }
         }
         graphics = other.graphics;
