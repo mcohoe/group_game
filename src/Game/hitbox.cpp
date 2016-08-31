@@ -65,29 +65,28 @@ bool Hitbox::is_touching(const Hitbox & other) const{
     return width_in_range and height_in_range; 
 }
 
-//Function that checks to see if a certain side is touched
-bool Hitbox::touching_side(const Hitbox & other, Direction to_check) const{
+//Function that checks to see if a certain side is touched as well as how many pixels it is (from the sides)
+int Hitbox::touching_side(const Hitbox & other, Direction to_check) const{
     if (!is_touching(other))
-        return false;
+        return 0;
 
     if (to_check == Left){
         if (x <= other.x + other.width and x >= other.x)
-            return true;
+            return other.x + other.width - x + 1;
     }
-
     if (to_check == Right){
         if (x + width <= other.x + other.width and x + width >= other.x)
-            return true;
+            return x + width - other.x + 1;
     }
     if (to_check == Up){
         if (y <= other.y + other.height and y >= other.y)
-            return true;
+            return other.y + other.height - y + 1;
     }
     if (to_check == Down){
         if (y + height <= other.y + other.height and y + height >= other.y)
-            return true;
+            return y + height - other.y + 1;
     }
-    return false;    
+    return 0;    
 
 }
 

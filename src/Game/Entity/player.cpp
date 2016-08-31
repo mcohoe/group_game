@@ -2,6 +2,8 @@
 
 #include "player.h"
 
+#include <SDL2/SDL.h>
+
 Player::Player(int x, int y, Graphics* graphics) : Entity_Fall(x, y)
 {
     if (graphics != NULL) {
@@ -12,7 +14,9 @@ Player::Player(int x, int y, Graphics* graphics) : Entity_Fall(x, y)
 
 void Player::update(Map& map, const Uint8* keys)
 {
-    // Do stuff with input
+    if (keys[SDL_SCANCODE_RIGHT]) {
+        x_accel = 2;
+    }
 
     Entity_Fall::update(map);
 }
