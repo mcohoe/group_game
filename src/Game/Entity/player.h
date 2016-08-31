@@ -4,9 +4,11 @@
 #define PLAYER_H
 
 #include "entity_fall.h"
+#include "Libraries/graphics.h"
 
 class Player : public Entity_Fall {
     public:
+        Player(int x = 0, int y = 0, Graphics* graphics = NULL);
         void update(Map& map, Uint8* keys);
 };
 

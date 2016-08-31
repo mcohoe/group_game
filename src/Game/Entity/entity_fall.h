@@ -7,6 +7,7 @@
 
 class Entity_Fall : public Entity {
     public:
+        Entity_Fall(int x, int y) : Entity(x, y) {}
         virtual void update(Map& map);
 
         static const int GRAVITY = 5;
