@@ -12,8 +12,7 @@ class Entity {
         Entity(int x = 0, int y = 0);
         virtual void update(Map& map);
 
-        static const int PIXEL_WIDTH = 16;
-        static const int PIXEL_HEIGHT = 16;
+        static const int PIXEL_SIZE = 16;
         static const int TILE_WIDTH = Tile::TILE_WIDTH;
         static const int TILE_HEIGHT = Tile::TILE_HEIGHT;
         static const int MAX_X_VEL = 40;
@@ -36,7 +35,7 @@ class Entity {
         int screen_x();
         int screen_y();
 
-        void change_pixel_xy(int& coord, int change, Map& map);
+        void change_pixel_xy(int& subpixel_coord, int& coord, int change, Map& map);
 };
 
 #endif

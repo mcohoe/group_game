@@ -4,8 +4,13 @@
 
 void Entity_Fall::update(Map& map)
 {
-    if (on_ground) y_accel = 0;
+    if (on_ground) {
+        y_accel = 0;
+        y_vel = 0;
+    }
     else y_accel = GRAVITY;
 
     on_ground = map.colliding_side(hitbox, Hitbox::Down);
+
+    Entity::update(map);
 }

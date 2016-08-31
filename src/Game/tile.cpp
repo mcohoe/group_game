@@ -38,7 +38,7 @@ void Tile::display_at(int x, int y)
     sprite.set_xy(x,y);
 }
 
-bool Tile::colliding_with(Hitbox other)
+bool Tile::colliding_with(const Hitbox& other)
 {
     if (solid) {
         if (hitbox.is_touching(other)) return true;
@@ -46,7 +46,7 @@ bool Tile::colliding_with(Hitbox other)
     return false;
 }
 
-bool Tile::colliding_side(Hitbox other, Hitbox::Direction to_check)
+bool Tile::colliding_side(const Hitbox& other, Hitbox::Direction to_check)
 {
     if (solid) {
         if (other.touching_side(hitbox, to_check)) return true;

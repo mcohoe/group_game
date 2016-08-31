@@ -18,7 +18,7 @@ Map::Map(Graphics * graphics)
     }
 }
 
-bool Map::colliding_with(Hitbox other)
+bool Map::colliding_with(const Hitbox& other)
 {
     for (int x = 0; x < WIDTH; x++) {
         for (int y = 0; y < HEIGHT; y++) {
@@ -30,7 +30,7 @@ bool Map::colliding_with(Hitbox other)
     return false;
 }
 
-bool Map::colliding_side(Hitbox other, Hitbox::Direction to_check)
+bool Map::colliding_side(const Hitbox& other, Hitbox::Direction to_check)
 {
     for (int x = 0; x < WIDTH; x++) {
         for (int y = 0; y < HEIGHT; y++) {

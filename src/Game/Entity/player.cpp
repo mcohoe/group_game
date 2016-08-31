@@ -7,10 +7,12 @@ Player::Player(int x, int y, Graphics* graphics) : Entity_Fall(x, y)
     if (graphics != NULL) {
         sprite = Sprite("Graphics/GloriousPlayer.png", graphics);
     }
+    hitbox.set_wh(32, 64);
 }
 
-void Player::update(Map& map, Uint8* keys)
+void Player::update(Map& map, const Uint8* keys)
 {
     // Do stuff with input
+
     Entity_Fall::update(map);
 }
