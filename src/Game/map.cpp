@@ -30,3 +30,14 @@ bool Map::colliding_with(Hitbox other)
     return false;
 }
 
+bool Map::colliding_side(Hitbox other, Hitbox::Direction to_check)
+{
+    for (int x = 0; x < WIDTH; x++) {
+        for (int y = 0; y < HEIGHT; y++) {
+            if (tiles[x][y].colliding_side(other, to_check)) {
+                return true;
+            }
+        }
+    }
+    return false;
+}

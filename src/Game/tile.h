@@ -15,6 +15,7 @@ class Tile {
         void change_tile(Id to_set);                          //function that changes the tile type
         void display_at(int x, int y);                        //function that sets the tile's sprite's x and y 
         bool colliding_with(Hitbox other);
+        bool colliding_side(Hitbox other, Hitbox::Direction to_check);
 
         static const int TILE_WIDTH = 32;                     //width of a tile
         static const int TILE_HEIGHT = 32;                    //height of a tile

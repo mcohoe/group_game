@@ -45,3 +45,11 @@ bool Tile::colliding_with(Hitbox other)
     }
     return false;
 }
+
+bool Tile::colliding_side(Hitbox other, Hitbox::Direction to_check)
+{
+    if (solid) {
+        if (other.touching_side(hitbox, to_check)) return true;
+    }
+    return false;
+}
