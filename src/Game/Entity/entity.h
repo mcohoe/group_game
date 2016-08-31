@@ -19,7 +19,7 @@ class Entity {
         static const int MAX_X_VEL = 40;
         static const int MAX_Y_VEL = 100;
 
-    private:
+    protected:
         int subpixel_x = 0;
         int subpixel_y = 0;
         int pixel_x = 0;
