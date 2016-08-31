@@ -18,7 +18,15 @@ Map::Map(Graphics * graphics)
     }
 }
 
-bool Map::colliding_with(int x, int y, Hitbox other)
+bool Map::colliding_with(Hitbox other)
 {
-    return tiles[x][y].colliding_with(other);
+    for (int x = 0; x < WIDTH; x++) {
+        for (int y = 0; y < HEIGHT; y++) {
+            if (tiles[x][y].colliding_with(other)) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
+

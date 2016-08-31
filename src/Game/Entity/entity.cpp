@@ -44,12 +44,8 @@ void Entity::change_pixel_xy(int& coord, int change, Map& map)
     for (int i = coord; i != coord + change; i += direction) {
         coord += direction;
         hitbox.set_xy(pixel_x, pixel_y);
-        for (int x = 0; x < Map::WIDTH; x++) {
-            for (int y = 0; y < Map::HEIGHT; y++) {
-                if (map.colliding_with(x, y, hitbox)) {
-                    return;
-                }
-            }
+        if (map.colliding_with(hitbox)) {
+            return;
         }
     }
 }
