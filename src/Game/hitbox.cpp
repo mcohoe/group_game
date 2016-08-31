@@ -22,13 +22,47 @@ void Hitbox::set_wh(int w, int h){
 
 //Function that checks to see if another hitbox is touching it
 bool Hitbox::is_touching(const Hitbox & other){
-    if (((x < other.x + other.width and x > other.x) or \
-         (x + width < other.x + other.width and x + width > other.x)) and\
-         ((y < other.y + other.height and y > other.y) or \
-         (y + height < other.y + other.height and y + height > other.y))){
-       return true;
+
+    bool width_in_range;              //Boolean that determines if the widths of the two hitboxs are in range with each other
+    bool height_in_range;             //Boolean that determines if the heights of the two hitboxs are in range with each othe
+
+    //check and see which hitbox has a smaller x range
+    if (width < other.width)
+    {
+        if ((x < other.x + other.width and x > other.x) or \
+           (x + width < other.x + other.width and x + width > other.x))
+        {    
+             width_in_range = true;
+        }
     }
-    else return false;
+    else
+    {
+        if ((other.x < x + width and other.x > x) or \
+           (other.x + other.width < x + width and other.x + other.width > x))
+        {
+            width_in_range = true;
+        }
+    }
+    
+    //check and see which hitbox has a smaller y range
+    if (height < other.height)
+    {
+        if((y < other.y + other.height and y > other.y) or \
+          (y + height < other.y + other.height and y + height > other.y))
+        {
+            height_in_range = true;
+        }
+    }
+    else
+    {
+        if((other.y < y + height and other.y > y) or \
+          (other.y + other.height < y + height and other.y + other.height > y))
+        {
+            height_in_range = true;
+        }
+    }
+
+    return width_in_range and height_in_range; 
 }
 
 //Function that checks to see if a certain side is touched
