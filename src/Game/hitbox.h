@@ -13,7 +13,7 @@ class Hitbox{
         void set_xy(int x_, int y_);                          //Function that sets the xy placement of the hitbox
         void set_wh(int w, int h);                            //Function that sets the height and width of the hitbox
         bool is_touching(const Hitbox & other) const;               //Function that checks to see if another hitbox is touching it
-        bool touching_side(const Hitbox & other, Direction to_check) const; //Function that checks to see if a certain side is touched
+        int touching_side(const Hitbox & other, Direction to_check) const; //Function that checks to see if a certain side is touched
 
     private:
         int x;                     //x position on map
