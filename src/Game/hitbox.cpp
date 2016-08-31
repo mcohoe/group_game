@@ -21,7 +21,7 @@ void Hitbox::set_wh(int w, int h){
 }
 
 //Function that checks to see if another hitbox is touching it
-bool Hitbox::is_touching(const Hitbox & other){
+bool Hitbox::is_touching(const Hitbox & other) const{
 
     bool width_in_range;              //Boolean that determines if the widths of the two hitboxs are in range with each other
     bool height_in_range;             //Boolean that determines if the heights of the two hitboxs are in range with each othe
@@ -66,7 +66,7 @@ bool Hitbox::is_touching(const Hitbox & other){
 }
 
 //Function that checks to see if a certain side is touched
-bool Hitbox::touching_side(const Hitbox & other, Direction to_check){
+bool Hitbox::touching_side(const Hitbox & other, Direction to_check) const{
     if (!is_touching(other))
         return false;
 
