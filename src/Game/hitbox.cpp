@@ -67,25 +67,70 @@ bool Hitbox::is_touching(const Hitbox & other) const{
 
 //Function that checks to see if a certain side is touched
 bool Hitbox::touching_side(const Hitbox & other, Direction to_check) const{
-    if (!is_touching(other))
-        return false;
+ 
+    bool width_in_range;              //Boolean that determines if the widths of the two hitboxs are in range with each other
+    bool height_in_range;             //Boolean that determines if the heights of the two hitboxs are in range with each othe
 
+    //check and see which hitbox has a smaller x range
+    if (width < other.width)
+    {
+        if ((x <= other.x + other.width and x >= other.x) or \
+           (x + width <= other.x + other.width and x + width >= other.x))
+        {    
+             width_in_range = true;
+        }
+    }
+    else
+    {
+        if ((other.x <= x + width and other.x >= x) or \
+           (other.x + other.width <= x + width and other.x + other.width >= x))
+        {
+            width_in_range = true;
+        }
+    }
+    
+    //check and see which hitbox has a smaller y range
+    if (height < other.height)
+    {
+        if((y <= other.y + other.height and y >= other.y) or \
+          (y + height <= other.y + other.height and y + height >= other.y))
+        {
+            height_in_range = true;
+        }
+    }
+    else
+    {
+        if((other.y <= y + height and other.y >= y) or \
+          (other.y + other.height <= y + height and other.y + other.height >= y))
+        {
+            height_in_range = true;
+        }
+    }
 
-    if (to_check == Left){
-        if (x <= other.x + other.width +1 and x >= other.x -1)
-            return true;
+    //If the height is in range, check to see if the left or right sides are touching
+    if (height_in_range)
+    {
+        if (to_check == Left){
+            if (x <= other.x + other.width +1 and x >= other.x -1)
+                return true;
+        }
+        if (to_check == Right){
+            if (x + width <= other.x + other.width +1 and x + width >= other.x -1)
+                return true;
+        }
     }
-    if (to_check == Right){
-        if (x + width <= other.x + other.width +1 and x + width >= other.x -1)
-            return true;
-    }
-    if (to_check == Up){
-        if (y <= other.y + other.height +1 and y >= other.y -1)
-            return true;
-    }
-    if (to_check == Down){
-        if (y + height <= other.y + other.height +1 and y + height >= other.y -1)
-            return true;
+
+    //If the width is in range, check to see if the top or bottom sides are touching
+    if (width_in_range)
+    {
+        if (to_check == Up){
+            if (y <= other.y + other.height +1 and y >= other.y -1)
+                return true;
+        }
+        if (to_check == Down){
+            if (y + height <= other.y + other.height +1 and y + height >= other.y -1)
+                return true;
+        }
     }
 
     return false;    
