@@ -26,8 +26,8 @@ void Entity::update(Map& map)
     else x_dir = Hitbox::Right;
     if (y_vel < 0) y_dir = Hitbox::Up;
     else y_dir = Hitbox::Down;
-    change_pixel_xy(subpixel_x, pixel_x, subpixel_x / PIXEL_SIZE - pixel_x, x_dir, map);
-    change_pixel_xy(subpixel_y, pixel_y, subpixel_y / PIXEL_SIZE - pixel_y, y_dir, map);
+    change_pixel_xy(subpixel_x, pixel_x, subpixel_x / PIXEL_SIZE - pixel_x, x_dir, map, x_vel);
+    change_pixel_xy(subpixel_y, pixel_y, subpixel_y / PIXEL_SIZE - pixel_y, y_dir, map, y_vel);
     tile_x = pixel_x / TILE_WIDTH;
     tile_y = pixel_y / TILE_HEIGHT;
 
@@ -45,7 +45,7 @@ int Entity::screen_y()
     return pixel_y;
 }
 
-void Entity::change_pixel_xy(int& subpixel_coord, int& coord, int change, Hitbox::Direction dir, Map& map)
+void Entity::change_pixel_xy(int& subpixel_coord, int& coord, int change, Hitbox::Direction dir, Map& map, int& vel)
 {
     if (change == 0) return;
     int direction = change / abs(change);
@@ -53,6 +53,7 @@ void Entity::change_pixel_xy(int& subpixel_coord, int& coord, int change, Hitbox
     for (int i = original_coord; i != original_coord + change; i += direction) {
         if (map.colliding_side(hitbox, dir)) {
             subpixel_coord = coord * PIXEL_SIZE;
+            vel = 0;
             return;
         }
         coord += direction;

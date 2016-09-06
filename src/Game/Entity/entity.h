@@ -16,7 +16,7 @@ class Entity {
         static const int TILE_WIDTH = Tile::TILE_WIDTH;
         static const int TILE_HEIGHT = Tile::TILE_HEIGHT;
         static const int MAX_X_VEL = 40;
-        static const int MAX_Y_VEL = 100;
+        static const int MAX_Y_VEL = 200;
 
     protected:
         int subpixel_x = 0;
@@ -35,7 +35,7 @@ class Entity {
         int screen_x();
         int screen_y();
 
-        void change_pixel_xy(int& subpixel_coord, int& coord, int change, Hitbox::Direction dir, Map& map);
+        void change_pixel_xy(int& subpixel_coord, int& coord, int change, Hitbox::Direction dir, Map& map, int& vel);
 };
 
 #endif

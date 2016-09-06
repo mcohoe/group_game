@@ -34,6 +34,11 @@ void Player::update(Map& map, const Uint8* keys)
         }
         else x_accel = 0;
     }
+    if (on_ground) {
+        if (keys[SDL_SCANCODE_UP]) {
+            y_accel = -64;
+        }
+    }
 
     Entity_Fall::update(map);
 }
