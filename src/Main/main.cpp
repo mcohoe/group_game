@@ -5,6 +5,7 @@
 #include "Libraries/audio.h"
 #include "Libraries/sprite.h"
 #include "Game/map.h"
+#include "Game/Entity/player.h"
 
 int main(int argc, char* args[])
 {
@@ -24,6 +25,7 @@ int main(int argc, char* args[])
     bool quit = false; // set to true when quitting the program
     SDL_Event e; // Event used to handle sdl events
     Map map(&graphics);
+    Player player(5, 5, &graphics);
     // Main loop
     while (!quit) {
         // Quit if needed
@@ -35,7 +37,7 @@ int main(int argc, char* args[])
                 quit =true;
         }
 
-        // Do stuff here
+        player.update(map, keys);
 
         graphics.update();
     }

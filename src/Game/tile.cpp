@@ -3,10 +3,11 @@
 #include "tile.h"
 
 //contrstuctor that takes in a tile id and the graphics. Builds an air tile if none are passed in.
-Tile::Tile(Id to_set, Graphics * graphics_)
+Tile::Tile(Id to_set, Graphics * graphics_, Hitbox hitbox_)
 {
      graphics = graphics_;
      change_tile(to_set);
+     hitbox = hitbox_;
 }
 //function that changes the tile type
 void Tile::change_tile(Id to_set)
@@ -35,4 +36,20 @@ void Tile::change_tile(Id to_set)
 void Tile::display_at(int x, int y)
 {
     sprite.set_xy(x,y);
+}
+
+bool Tile::colliding_with(const Hitbox& other)
+{
+    if (solid) {
+        if (hitbox.is_touching(other)) return true;
+    }
+    return false;
+}
+
+bool Tile::colliding_side(const Hitbox& other, Hitbox::Direction to_check)
+{
+    if (solid) {
+        if (other.touching_side(hitbox, to_check)) return true;
+    }
+    return false;
 }
