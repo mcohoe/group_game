@@ -35,7 +35,7 @@ class Entity {
         int screen_x();
         int screen_y();
 
-        void change_pixel_xy(int& subpixel_coord, int& coord, int change, Map& map);
+        void change_pixel_xy(int& subpixel_coord, int& coord, int change, Hitbox::Direction dir, Map& map);
 };
 
 #endif
